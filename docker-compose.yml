@@ -1,0 +1,40 @@
+---
+version: '3.0'
+services:
+  web:
+    build:
+      context: .
+    environment:
+      - domain=localhost:8000
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgres://postgres@db/postgres
+      - MASTER_KEY=abcdefg12345
+      - HCAPTCHA_SECRET=abcdefg54321
+      - CLOUDFLARE_KEY=gfedcba12345
+      - AWS_ACCESS_KEY_ID=gfedcba54321
+      - AWS_SECRET_ACCESS_KEY=12345abcdefg
+      - GIPHY_KEY=12345gfedcba
+      - FLASK_ENV=development
+      - FORCE_HTTPS=0
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/root/ruqqus:z
+    depends_on:
+      - db
+      - redis
+  db:
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5433:5432
+    volumes:
+      - ruqqus-db:/var/lib/postgresql/data:z
+  redis:
+    image: redis:5
+volumes:
+  ruqqus-db:
