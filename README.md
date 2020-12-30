@@ -92,6 +92,21 @@ As an open-source project, we are supported by the community. If you would like 
 
 ## Local development
 
+### Docker (Any Platform)
+
+1. Run `docker-compose up` from the project root directory.
+2. Navigate to `localhost:8000` in your browser. Ruqqus should be running!
+3. You can now login with user `ruqqie`, password `password`!
+
+Viewing the database (`psql`):
+* `docker-compose run db psql postgres://postgres@db/postgres`
+
+You can also access the database with local tools via port `5433`. This can be useful for GUI tools such as DBeaver. For example, to connect with your local machine's `psql`:
+* `psql postgres://postgres@localhost:5433/posgres`
+
+If you make code changes and want to restart the local server:
+* `docker-compose restart web`
+
 ### [Mac](https://github.com/ruqqus/ruqqus/wiki/Mac-Installation)
 
 ### [Linux](https://github.com/ruqqus/ruqqus/wiki/Linux-Installation)
