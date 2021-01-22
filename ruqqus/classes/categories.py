@@ -29,6 +29,7 @@ class Category(Base, Stndrd):
 
     @property
     def json(self):
+sdfjasdhfkjasf
         return {
             "id": self.id,
             "name": self.name,
